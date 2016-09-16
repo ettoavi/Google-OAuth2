@@ -1,6 +1,7 @@
 # Google-OAuth2
 
-is a library designed to make working with Google's Oauth2 API's more bearable.
+is a library designed to make working with Google's Oauth2 API's more bearable.<br/>
+taken from [treygriffith](https://github.com/treygriffith/google-oauth2)
 
 As of now, it only supports one API, contacts, out of the box, but adding additional API's, either on the fly or permanently, is quite easy.
 
