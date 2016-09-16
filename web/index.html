@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Google Oauth 2 : Javascript">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Google Oauth 2</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/ettoavi/Google-OAuth2">View on GitHub</a>
+
+          <h1 id="project_title">Google Oauth 2</h1>
+          <h2 id="project_tagline">Javascript</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/ettoavi/Google-OAuth2/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/ettoavi/Google-OAuth2/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a id="google-oauth2" class="anchor" href="#google-oauth2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Google-OAuth2</h1>
+
+<p>is a library designed to make working with Google's Oauth2 API's more bearable.<br>
+taken from <a href="https://github.com/treygriffith/google-oauth2">treygriffith</a></p>
+
+<p>As of now, it only supports one API, contacts, out of the box, but adding additional API's, either on the fly or permanently, is quite easy.</p>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>USAGE</h2>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> oauth2 <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">google_oauth2</span>(<span class="pl-c1">MY_CLIENT_ID</span> [, options]);
+
+<span class="pl-smi">oauth2</span>.<span class="pl-en">authenticate</span>(); <span class="pl-c">//sends the user to the Google authorization endpoint</span>
+
+<span class="pl-smi">oauth2</span>.<span class="pl-en">authResponse</span>(<span class="pl-k">function</span>(<span class="pl-smi">error</span>, <span class="pl-smi">access_token</span>) { <span class="pl-c">//extract the access token</span>
+    <span class="pl-k">if</span>(access_token) {
+        <span class="pl-c">//execute some code here</span>
+    } <span class="pl-k">else</span> <span class="pl-k">if</span>(error) {
+        <span class="pl-c">//a response was attempted, but an error occurred</span>
+    } <span class="pl-k">else</span> {
+        <span class="pl-c">//there was nothing in the url fragment, in all likelihood, this was not a response to authentication</span>
+    }
+});
+
+<span class="pl-smi">oauth2</span>.<span class="pl-en">query</span>(api [, options], <span class="pl-k">function</span>(<span class="pl-smi">error</span>, <span class="pl-smi">results</span>) {
+    <span class="pl-c">// execute some code on the returned values</span>
+});</pre></div>
+
+<hr>
+
+<h1>
+<a id="google-oauther" class="anchor" href="#google-oauther" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>google-oauther</h1>
+
+<p><a href="https://github.com/clalimarmo/google-oauther">clalimarmo</a></p>
+
+<p>Simple Google OAuth2 module, for use in single page, client-side only
+applications.  It opens a popup window to request permission, and stores the
+auth token returned by Google.</p>
+
+<h2>
+<a id="usage-1" class="anchor" href="#usage-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h2>
+
+<pre><code>var authenticator = require('google-oauther');
+
+authenticator.onAuthenticate(function(auth) {
+  //stuff to do once the authenticator has authenticated user's profile info
+  //(The auth parameter passed to the callback the authenticator, itself)
+});
+
+authenticator.run({
+  scope: ['https://www.googleapis.com/auth/devstorage.read_write'],
+  clientID: 'your-google-oauth2-client-id',
+  tokenExpirationBuffer: 60000
+});
+</code></pre>
+
+<h2>
+<a id="configuration" class="anchor" href="#configuration" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Configuration</h2>
+
+<p>Required:</p>
+
+<ul>
+<li>
+<em>scope</em> - the permissions to request from google</li>
+<li>
+<em>clientID</em> - your google oauth2 client id</li>
+</ul>
+
+<p>Optional:</p>
+
+<ul>
+<li>
+<em>tokenExpirationBuffer</em> - number of milliseconds before the token actually expires,
+after which the authenticator will consider the token expired. Useful for getting a
+token, or preventing users from attempting unauthenticated requests, before the
+token expires.</li>
+</ul>
+
+<h2>
+<a id="methods" class="anchor" href="#methods" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Methods</h2>
+
+<h3>
+<a id="onauthenticate" class="anchor" href="#onauthenticate" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>onAuthenticate</h3>
+
+<p>Specify behavior that should occur once the user grants the requested
+permissions. Do this before you call <code>run</code></p>
+
+<h3>
+<a id="run" class="anchor" href="#run" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>run</h3>
+
+<p>Requests authentication from the user, and whatever permissions you specify
+with the <code>scope</code> parameter.</p>
+
+<h3>
+<a id="user" class="anchor" href="#user" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>user</h3>
+
+<p>Returns the user profile information gleaned from an authenticated request to
+<a href="https://www.googleapis.com/plus/v1/people/me">https://www.googleapis.com/plus/v1/people/me</a></p>
+
+<h3>
+<a id="token" class="anchor" href="#token" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>token</h3>
+
+<p>Returns the auth token. Useful for subsequent requests to other Google APIs.</p>
+
+<h3>
+<a id="reauthenticate" class="anchor" href="#reauthenticate" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>reauthenticate</h3>
+
+<p>Does the same thing as run.</p>
+
+<h3>
+<a id="tokenisexpired" class="anchor" href="#tokenisexpired" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>tokenIsExpired</h3>
+
+<p>Indicates whether the token is expired or not.</p>
+
+<h2>
+<a id="notes" class="anchor" href="#notes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Notes</h2>
+
+<p>The authenticator always requests the 'profile' OAuth2 scope, in addition to
+whatever scopes are specified in the call to <code>run</code>.</p>
+
+<p>For the popup window to send the auth token returned by google back to the main
+window, a global callback function is attached to the main window, called
+<code>authenticatedWith</code>. Including the <code>google-oauther</code> module will attach this
+callback function automatically; overwriting this function will break the
+authenticator.</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Google Oauth 2 maintained by <a href="https://github.com/ettoavi">ettoavi</a></p>
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
